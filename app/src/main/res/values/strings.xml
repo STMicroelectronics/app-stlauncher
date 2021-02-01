@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">STMicroelectronics</string>
+
+    <!-- Activity label -->
+    <string name="title_activity_settings">Settings</string>
+
+    <!-- Application Package Names -->
+    <string name="st_app_package_name">com.st.</string>
+    <string name="st_app_package_name_bis">com.stmicrolectronics.</string>
+    <string name="st_app_package_name_ter">com.stmicroelectronics.</string>
+    <string name="settings_app_package_name">com.android.settings</string>
+    <string name="st_launcher_package_name">com.stmicroelectronics.stlauncher</string>
+
+    <!-- Layout fixed settings -->
+    <string name="stapp_name">ST applications</string>
+    <string name="st_app_content_desc">key to ST application</string>
+
+    <string name="stapp_add_text">+</string>
+
+</resources>
