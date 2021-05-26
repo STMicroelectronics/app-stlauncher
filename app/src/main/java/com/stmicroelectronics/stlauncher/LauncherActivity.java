@@ -50,10 +50,6 @@ public class LauncherActivity extends AppCompatActivity implements AppAdapter.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_launcher);
 
-        if(BuildConfig.DEBUG) {
-            Timber.plant(new Timber.DebugTree());
-        }
-
         // hide toolbar (not required)
         ActionBar mActionBar = getSupportActionBar();
         if (mActionBar != null) {
@@ -176,9 +172,10 @@ public class LauncherActivity extends AppCompatActivity implements AppAdapter.On
     public void onClick(String stAppName) {
         Intent intent = mManager.getLaunchIntentForPackage(stAppName);
         if (intent != null) {
-            intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
             ActivityOptions options = ActivityOptions.makeBasic();
+            intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
             startActivity(intent, options.toBundle());
+            overridePendingTransition(0, 0);
         }
     }
 
