@@ -2,7 +2,6 @@ package com.stmicroelectronics.stlauncher.dialog;
 
 import android.app.Dialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -43,25 +42,10 @@ public class AddAppDialogFragment extends DialogFragment {
         builder.setTitle("Select application from the following list");
 
         CharSequence[] sequence = mNames.toArray(new CharSequence[0]);
-        builder.setSingleChoiceItems(sequence, -1, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                mName = mNames.get(which);
-            }
-        });
+        builder.setSingleChoiceItems(sequence, -1, (dialog, which) -> mName = mNames.get(which));
 
-        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                mListener.onDialogPositiveAddApp(mName);
-            }
-        });
-        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                mListener.onDialogNegativeAddApp();
-            }
-        });
+        builder.setPositiveButton("Yes", (dialog, which) -> mListener.onDialogPositiveAddApp(mName));
+        builder.setNegativeButton("No", (dialog, which) -> mListener.onDialogNegativeAddApp());
         return builder.create();
     }
 }

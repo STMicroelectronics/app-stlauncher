@@ -83,43 +83,30 @@ public class LauncherActivity extends AppCompatActivity implements AppAdapter.On
         initSwipeRefresh();
 
         // set floating action button listener
-        mFab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Timber.d("Add application requested");
-                List<String> appList = mAppAdapter.filterDisplayedAppList(mFullAppList);
-                if (! appList.isEmpty()) {
-                    AddAppDialogFragment fragment = new AddAppDialogFragment(appList, new AddAppDialogFragment.AddAppDialogListener() {
-                        @Override
-                        public void onDialogPositiveAddApp(String name) {
-                            Timber.d("Add application in list: %s", name);
-                            for (AppDetails app : mFullAppList) {
-                                if (app.getAppLabel().equals(name)) {
-                                    final AppDetails mAppToAdd = app;
-                                    runOnUiThread(new Runnable() {
-                                        @Override
-                                        public void run() {
-                                            mAppAdapter.addItem(mAppToAdd);
-                                        }
-                                    });
-                                }
+        mFab.setOnClickListener(v -> {
+            Timber.d("Add application requested");
+            List<String> appList = mAppAdapter.filterDisplayedAppList(mFullAppList);
+            if (! appList.isEmpty()) {
+                AddAppDialogFragment fragment = new AddAppDialogFragment(appList, new AddAppDialogFragment.AddAppDialogListener() {
+                    @Override
+                    public void onDialogPositiveAddApp(String name) {
+                        Timber.d("Add application in list: %s", name);
+                        for (AppDetails app : mFullAppList) {
+                            if (app.getAppLabel().equals(name)) {
+                                final AppDetails mAppToAdd = app;
+                                runOnUiThread(() -> mAppAdapter.addItem(mAppToAdd));
                             }
                         }
+                    }
 
-                        @Override
-                        public void onDialogNegativeAddApp() {
-                            Timber.d("Add application in list cancelled");
-                        }
-                    });
-                    fragment.show(getSupportFragmentManager(), "com.stmicroelectronics.stlauncher.fab.tag");
-                } else {
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            Toast.makeText(getApplicationContext(),"No more application available, swipe down to refresh if needed",Toast.LENGTH_LONG).show();
-                        }
-                    });
-                }
+                    @Override
+                    public void onDialogNegativeAddApp() {
+                        Timber.d("Add application in list cancelled");
+                    }
+                });
+                fragment.show(getSupportFragmentManager(), "com.stmicroelectronics.stlauncher.fab.tag");
+            } else {
+                runOnUiThread(() -> Toast.makeText(getApplicationContext(),"No more application available, swipe down to refresh if needed",Toast.LENGTH_LONG).show());
             }
         });
     }
@@ -131,13 +118,10 @@ public class LauncherActivity extends AppCompatActivity implements AppAdapter.On
     }
 
     private void initSwipeRefresh() {
-        mSwipeRefreshView.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                mSwipeRefreshView.setRefreshing(true);
-                updateFullAppList();
-                mSwipeRefreshView.setRefreshing(false);
-            }
+        mSwipeRefreshView.setOnRefreshListener(() -> {
+            mSwipeRefreshView.setRefreshing(true);
+            updateFullAppList();
+            mSwipeRefreshView.setRefreshing(false);
         });
         mSwipeRefreshView.setColorSchemeResources(R.color.colorPrimary, R.color.colorPrimaryDark, R.color.colorAccent);
     }

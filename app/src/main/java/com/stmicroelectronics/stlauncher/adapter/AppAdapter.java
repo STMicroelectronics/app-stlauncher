@@ -157,14 +157,14 @@ public class AppAdapter extends RecyclerView.Adapter<AppAdapter.ViewHolder> {
 
         @Override
         public void onClick(View view) {
-            int adapterPosition = getAdapterPosition();
+            int adapterPosition = getAbsoluteAdapterPosition();
             AppDetails app = arrayList.get(adapterPosition);
             mListener.onClick(app.getAppName());
         }
 
         @Override
         public boolean onLongClick(View v) {
-            int adapterPosition = getAdapterPosition();
+            int adapterPosition = getAbsoluteAdapterPosition();
             AppDetails app = arrayList.get(adapterPosition);
             mListener.onLongClick(app.getAppLabel());
             return true;

@@ -4,6 +4,9 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/STLauncher.iml" filepath="$PROJECT_DIR$/.idea/modules/STLauncher.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/STLauncher.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/STLauncher.app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/STLauncher.app.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/app/STLauncher.app.androidTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/STLauncher.app.main.iml" filepath="$PROJECT_DIR$/.idea/modules/app/STLauncher.app.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/STLauncher.app.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/app/STLauncher.app.unitTest.iml" />
     </modules>
   </component>
 </project>

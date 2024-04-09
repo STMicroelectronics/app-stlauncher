@@ -2,7 +2,6 @@ package com.stmicroelectronics.stlauncher.dialog;
 
 import android.app.Dialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -38,18 +37,8 @@ public class RemoveAppDialogFragment extends DialogFragment {
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
         builder.setMessage("Do you want to remove the application " + mName + " ?");
-        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                mListener.onDialogPositiveRemoveApp(mName);
-            }
-        });
-        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                mListener.onDialogNegativeRemoveApp(mName);
-            }
-        });
+        builder.setPositiveButton("Yes", (dialog, which) -> mListener.onDialogPositiveRemoveApp(mName));
+        builder.setNegativeButton("No", (dialog, which) -> mListener.onDialogNegativeRemoveApp(mName));
         return builder.create();
     }
 }

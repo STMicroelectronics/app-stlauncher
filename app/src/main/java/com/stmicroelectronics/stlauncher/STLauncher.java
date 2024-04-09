@@ -39,5 +39,9 @@ public class STLauncher extends Application {
     @Override
     public void onTerminate() {
         super.onTerminate();
+
+        if (tree != null) {
+            Timber.uproot(tree);
+        }
     }
 }
